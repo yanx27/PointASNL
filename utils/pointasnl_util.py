@@ -323,7 +323,7 @@ def PointASNLDecodingLayer(xyz1, xyz2, points1, points2, nsample, mlp, is_traini
 
         '''Point Local Cell'''
         grouped_xyz, grouped_feature, idx = grouping(interpolated_points, nsample, xyz1, xyz1, use_xyz=use_xyz,use_knn=use_knn, radius=radius)
-
+        grouped_xyz -= tf.tile(tf.expand_dims(xyz1, 2), [1, 1, nsample, 1])  # translation normalization
 
         weight = weight_net_hidden(grouped_xyz, [32], scope = 'decode_weight_net', is_training=is_training, bn_decay = bn_decay, weight_decay = weight_decay)
 
