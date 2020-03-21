@@ -80,7 +80,7 @@ We highly recommend training with this method, although it takes a long time to 
 ```
 # Training 
 $ cd ScanNet/
-$ python train_scannet_grid.py --data [SCANNET PATH] --log_dir PointASNL_grid --num_point 10240 --model pointasnl_sem_seg_res
+$ python train_scannet_grid.py --data [SCANNET PATH] --log_dir PointASNL_grid --num_point 10240 --model pointasnl_sem_seg_res --in_radius 2
 
 # Evaluation 
 $ cd ScanNet/
