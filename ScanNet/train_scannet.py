@@ -198,7 +198,7 @@ def train():
             log_string('One epoch time: %.4f' % (end_time - start_time))
             iou = eval_one_epoch(sess, ops, test_writer)
 
-            if epoch % 50 == 0 and epoch > 0:
+            if epoch % 10 == 0 and epoch > 499:
                 whole_iou = eval_whole_scene_one_epoch(sess, ops, whole_test_writer)
                 log_string('Whole scene class avg mIOU is: %.5f' % whole_iou)
 
