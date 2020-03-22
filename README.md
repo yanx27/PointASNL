@@ -91,11 +91,11 @@ SemanticKITTI dataset can be found [here](http://semantic-kitti.org/dataset.html
 ```
 # Training 
 $ cd SemanticKITTI/
-$ python train_semantic_kitti.py --data [SemanticKITTI PATH] --log_dir PointASNL
+$ python train_semantic_kitti.py --data [SemanticKITTI PATH] --log_dir PointASNL --with_remission
 
 # Evaluation 
 $ cd SemanticKITTI/
-$ python test_semantic_kitti.py --data [SemanticKITTI PATH]  --model_path log/PointASNL/latest_model.ckpt 
+$ python test_semantic_kitti.py --data [SemanticKITTI PATH]  --model_path log/PointASNL/latest_model.ckpt  --with_remission
 ```
 
 ## Acknowledgement
