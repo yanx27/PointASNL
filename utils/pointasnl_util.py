@@ -212,7 +212,7 @@ def PointNonLocalCell(feature,new_point,mlp,is_training, bn_decay, weight_decay,
         new_nonlocal_point = tf.matmul(attention_map, transformed_feature2) #(batch_size, npoint*nsample, bottleneck_channel)
         new_nonlocal_point = tf_util.conv2d(tf.reshape(new_nonlocal_point,[batch_size,npoint, nsample, bottleneck_channel]), mlp[-1], [1,1],
                                                 padding='VALID', stride=[1,1],
-                                                bn=bn, is_training=is_training, activation_fn=None,
+                                                bn=bn, is_training=is_training, 
                                                 scope='conv_back_project', bn_decay=bn_decay, weight_decay = weight_decay)
         new_nonlocal_point = tf.squeeze(new_nonlocal_point, axis=[1])  # (batch_size, npoints, mlp2[-1])
 
@@ -257,7 +257,7 @@ def PointASNLSetAbstraction(xyz, feature, npoint, nsample, mlp, is_training, bn_
         '''Skip Connection'''
         skip_spatial = tf.reduce_max(new_point, axis=[2])
         skip_spatial = tf_util.conv1d(skip_spatial, mlp[-1], 1,padding='VALID', stride=1,
-                                     bn=bn, is_training=is_training, scope='skip',activation_fn=None,
+                                     bn=bn, is_training=is_training, scope='skip',
                                      bn_decay=bn_decay, weight_decay=weight_decay)
 
         '''Point Local Cell'''
@@ -274,22 +274,20 @@ def PointASNLSetAbstraction(xyz, feature, npoint, nsample, mlp, is_training, bn_
         new_point = tf.matmul(new_point, weight)
         new_point = tf_util.conv2d(new_point, mlp[-1], [1,new_point.get_shape()[2].value],
                                         padding='VALID', stride=[1,1],
-                                        bn=bn, is_training=is_training, activation_fn=None,
+                                        bn=bn, is_training=is_training, 
                                         scope='after_conv', bn_decay=bn_decay, weight_decay = weight_decay)
 
         new_point = tf.squeeze(new_point, [2])  # (batch_size, npoints, mlp2[-1])
 
         new_point = tf.add(new_point,skip_spatial)
-        new_point = tf.nn.leaky_relu(new_point)
 
         if NL:
             new_point = tf.add(new_point, new_nonlocal_point)
 
         '''Feature Fushion'''
         new_point = tf_util.conv1d(new_point, mlp[-1], 1,
-                                      padding='VALID', stride=1,
-                                      bn=bn, is_training=is_training, activation_fn=tf.nn.leaky_relu,
-                                      scope='aggregation', bn_decay=bn_decay, weight_decay=weight_decay)
+                                  padding='VALID', stride=1, bn=bn, is_training=is_training, 
+                                  scope='aggregation', bn_decay=bn_decay, weight_decay=weight_decay)
 
         return new_xyz, new_point
 

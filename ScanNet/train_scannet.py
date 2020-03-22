@@ -67,7 +67,7 @@ dataloader = 'scannet_dataset.py'
 if FLAGS.log_dir is None:
     LOG_DIR = 'log/test'
 else:
-    LOG_DIR = FLAGS.log_dir
+    LOG_DIR = 'log/' + FLAGS.log_dir
 if not os.path.exists(LOG_DIR): os.mkdir(LOG_DIR)
 os.system('cp %s %s' % (MODEL_FILE, LOG_DIR))  # bkp of model def
 os.system('cp %s %s' % (PointASNL, LOG_DIR))
