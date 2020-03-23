@@ -93,8 +93,7 @@ class SemanticKittiDataset():
             if len(cur_semantic_seg) == 0:
                 continue
             mask = np.sum((cur_point_set >= (curmin - self.padding)) * (cur_point_set <= (curmax + self.padding)), axis=1) == 3
-            if sum(mask) / float(len(mask)) < 0.01:
-                continue
+
             isvalid = np.sum(cur_semantic_seg > 0) / len(cur_semantic_seg) >= 0.7
             if isvalid:
                 break
@@ -193,16 +192,14 @@ class SemanticKittiDataset_whole():
                 if len(cur_semantic_seg) == 0:
                     continue
                 mask = np.sum((cur_point_set >= (curmin - self.padding)) * (cur_point_set <= (curmax + self.padding)),axis=1) == 3
-                if sum(mask) / float(len(mask)) < 0.01:
-                    continue
+
                 choice = np.random.choice(len(cur_semantic_seg), self.sample_points, replace=True)
                 point_set = cur_point_full[choice, :]  # Nx3/6
                 if self.with_remission:
                     point_set = np.concatenate((point_set, np.expand_dims(self.scan.remissions[choice], axis=1)),axis=1)
                 semantic_seg = cur_semantic_seg[choice]  # N
                 mask = mask[choice]
-                if sum(mask) / float(len(mask)) < 0.01:
-                    continue
+
                 sample_weight = label_weights[semantic_seg]
                 sample_weight *= mask  # N
                 point_sets.append(np.expand_dims(point_set, 0))  # 1xNx3
