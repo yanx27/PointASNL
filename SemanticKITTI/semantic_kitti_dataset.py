@@ -16,7 +16,7 @@ seed = 100
 
 class SemanticKittiDataset():
     def __init__(self, root, sample_points=8192, block_size=10, num_classes=20, split='train', with_remission=False,
-                 config_file='semantic-kitti.yaml', should_map=True, padding=1, random_sample=False, random_rate=0.1):
+                 config_file='semantic-kitti.yaml', should_map=True, padding=0.01, random_sample=False, random_rate=0.1):
         self.root = root
         assert split in splits
         self.split = split
@@ -114,8 +114,7 @@ class SemanticKittiDataset():
 
 class SemanticKittiDataset_whole():
     def __init__(self, root, sample_points=8192, block_size=10, num_classes=20, split='train', with_remission=False,
-                 config_file='semantic-kitti.yaml', should_map=True, padding=1,
-                 random_sample=False, random_rate=0.1):
+                 config_file='semantic-kitti.yaml', should_map=True, padding=0.01, random_sample=False, random_rate=0.1):
         self.root = root
         assert split in splits
         self.split = split
