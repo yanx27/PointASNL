@@ -87,16 +87,23 @@ $ cd ScanNet/
 $ python test_scannet_grid.py --data [SCANNET PATH]  --model_path log/PointASNL_grid/latest_model.ckpt 
 ```
 ### (4) SemanticKITTI Segmentation
-SemanticKITTI dataset can be found [here](http://semantic-kitti.org/dataset.html#download). Download the files related to semantic segmentation and extract everything into the same folder. 
+* SemanticKITTI dataset can be found [here](http://semantic-kitti.org/dataset.html#download). Download the files related to semantic segmentation and extract everything into the same folder. 
+* Add codes with grid sampling processing (using `--prepare_data` just in the first running).
 ```
 # Training 
 $ cd SemanticKITTI/
 $ python train_semantic_kitti.py --data [SemanticKITTI PATH] --log_dir PointASNL --with_remission
+# or
+$ python train_semantic_kitti_grid.py --data [SemanticKITTI PATH] --log_dir PointASNL_grid --prepare_data 
 
 # Evaluation 
 $ cd SemanticKITTI/
 $ python test_semantic_kitti.py --data [SemanticKITTI PATH]  --model_path log/PointASNL/latest_model.ckpt  --with_remission
+# or
+$ python test_semantic_kitti_grid.py --data [SemanticKITTI PATH] --model_path log/PointASNL_grid/best_model.ckpt --test_area [e.g., 08]
+
 ```
+
 
 ## Acknowledgement
 * The code is borrowed from [PointNet++](https://github.com/charlesq34/pointnet2), [PointConv](https://github.com/DylanWusee/pointconv) and [KPConv](https://github.com/HuguesTHOMAS/KPConv) (KPConv only for grid sampling on ScanNet). 
