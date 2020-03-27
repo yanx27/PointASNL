@@ -23,7 +23,9 @@ from semantic_kitti_dataset_grid import SemanticKITTIDataset
 
 data_config = 'semantic-kitti.yaml'
 DATA = yaml.safe_load(open(data_config, 'r'))
-remap_dict = DATA["learning_map"]
+remap_dict = DATA["learning_map_inv"]
+
+# make lookup table for mapping
 max_key = max(remap_dict.keys())
 remap_lut = np.zeros((max_key + 100), dtype=np.int32)
 remap_lut[list(remap_dict.keys())] = list(remap_dict.values())
@@ -169,7 +171,6 @@ class ModelTester:
                             pred = np.argmax(probs, 1)
                             store_path = join(test_path, dataset.test_scan_number, 'predictions',
                                               str(frame) + '.label')
-                            pred = pred + 1
                             pred = pred.astype(np.uint32)
                             upper_half = pred >> 16  # get upper half for instances
                             lower_half = pred & 0xFFFF  # get lower half for semantics
