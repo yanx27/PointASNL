@@ -88,7 +88,8 @@ $ python test_scannet_grid.py --data [SCANNET PATH]  --model_path log/PointASNL_
 ```
 ### (4) SemanticKITTI Segmentation
 * SemanticKITTI dataset can be found [here](http://semantic-kitti.org/dataset.html#download). Download the files related to semantic segmentation and extract everything into the same folder. 
-* The code is similar to code of ScanNet, which can achieve better result with grid sampling processing (using `--prepare_data` just in the first running).
+* We add codes with grid sampling processing, which can achieve better result of around **52%** (using `--prepare_data` just in the first running).
+* Please using official [semantic_kitti_api](https://github.com/PRBonn/semantic-kitti-api) for evaluation.
 ```
 # Training 
 $ cd SemanticKITTI/
@@ -106,7 +107,8 @@ $ python test_semantic_kitti_grid.py --data [SemanticKITTI PATH] --model_path lo
 
 
 ## Acknowledgement
-* The code is borrowed from [PointNet++](https://github.com/charlesq34/pointnet2), [PointConv](https://github.com/DylanWusee/pointconv) and [KPConv](https://github.com/HuguesTHOMAS/KPConv) (KPConv only for grid sampling on ScanNet). 
+* The original code is borrowed from [PointNet++](https://github.com/charlesq34/pointnet2) and [PointConv](https://github.com/DylanWusee/pointconv).
+* The code with grid sampling is borrowed from [KPConv](https://github.com/HuguesTHOMAS/KPConv) and [RandLA-Net](https://github.com/QingyongHu/RandLA-Net). 
 * The kd-tree tool is from [nanoflann](https://github.com/jlblancoc/nanoflann).
 ## License
 This repository is released under MIT License (see LICENSE file for details).
