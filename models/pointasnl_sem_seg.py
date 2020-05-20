@@ -50,7 +50,7 @@ def get_model(point_cloud, is_training, num_class, bn_decay=None, weight_decay=N
     return net, end_points
 
 
-def get_loss(pred, label, end_points, smpw=1.0, uniform_weight=0.01, weights_decay=1e-4):
+def get_loss(pred, label, end_points, smpw=1.0, uniform_weight=0.01, weights_decay=1e-4, radius=0.07):
     """
     pred: BxNxC,
     label: BxN,
@@ -59,7 +59,7 @@ def get_loss(pred, label, end_points, smpw=1.0, uniform_weight=0.01, weights_dec
     regularization_losses = [tf.nn.l2_loss(v) for v in tf.global_variables() if 'weights' in v.name]
     regularization_loss = weights_decay * tf.add_n(regularization_losses)
     classify_loss = tf.losses.sparse_softmax_cross_entropy(labels=label, logits=pred, weights=smpw)
-    uniform_loss = get_repulsion_loss(end_points['l1_xyz'], nsample=20, radius=0.07)
+    uniform_loss = get_repulsion_loss(end_points['l1_xyz'], nsample=20, radius=radius)
     weight_reg = tf.add_n(tf.get_collection('losses'))
     classify_loss_mean = tf.reduce_mean(classify_loss, name='classify_loss_mean')
     total_loss = classify_loss_mean + weight_reg + uniform_weight * uniform_loss + regularization_loss

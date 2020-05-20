@@ -147,12 +147,12 @@ def SampleWeights(new_point, grouped_xyz, mlps, is_training, bn_decay, weight_de
         new_group_features = tf.reshape(new_group_features, (batch_size, npoint, nsample, channel))
         for i, c in enumerate(mlps):
             activation = tf.nn.relu if i < len(mlps) - 1 else None
-            new_group_weights = tf_util.conv2d(new_group_features, c, [1, 1],
+            new_group_features = tf_util.conv2d(new_group_features, c, [1, 1],
                                                padding='VALID', stride=[1, 1],
                                                bn=bn, is_training=is_training,
                                                scope='mlp2_%d' % (i), bn_decay=bn_decay, weight_decay=weight_decay,
                                                activation_fn=activation)
-        new_group_weights = tf.nn.softmax(new_group_weights, axis=2)  # (batch_size, npoint,nsample, mlp[-1)
+        new_group_weights = tf.nn.softmax(new_group_features, axis=2)  # (batch_size, npoint,nsample, mlp[-1)
         return new_group_weights
 
 def AdaptiveSampling(group_xyz, group_feature, num_neighbor, is_training, bn_decay, weight_decay, scope, bn):

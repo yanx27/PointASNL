@@ -27,7 +27,7 @@ git clone https://github.com/yanx27/PointASNL.git
 Installation instructions for Ubuntu 16.04 (available at **CUDA10**):
      
 * Make sure <a href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html">CUDA</a>  and <a href="https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html">cuDNN</a> are installed. Only this configurations has been tested: 
-     - Python 3.6.9, TensorFlow 1.13.0, CUDA 10.1
+     - Python 3.6.9, TensorFlow 1.13.1, CUDA 10.1
 
 
 * Follow <a href="https://www.tensorflow.org/install/pip">Tensorflow installation procedure</a>.
