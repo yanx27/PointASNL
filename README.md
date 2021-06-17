@@ -86,6 +86,12 @@ $ python train_scannet_grid.py --data [SCANNET PATH] --log_dir PointASNL_grid --
 $ cd ScanNet/
 $ python test_scannet_grid.py --data [SCANNET PATH]  --model_path log/PointASNL_grid/latest_model.ckpt 
 ```
+
+#### Pre-trained Model
+| Model         | mIoU  | Download                                                     |
+| ------------- |  ------------- | ------------------------------------------------------------ |
+| pointasnl_sem_seg_res | 66.93  | [ckpt-163.9M](https://drive.google.com/file/d/1cSCOTScBZOJI4shU4Dwl8EXYy0NBUR5n/view?usp=sharing) |
+
 ### (4) SemanticKITTI Segmentation
 * SemanticKITTI dataset can be found [here](http://semantic-kitti.org/dataset.html#download). Download the files related to semantic segmentation and extract everything into the same folder. 
 * We add codes with grid sampling processing, which can achieve better result of around **52%** (using `--prepare_data` just in the first running).
