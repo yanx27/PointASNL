@@ -8,10 +8,11 @@ Xu Yan, Chaoda Zheng, [Zhen Li*](https://mypage.cuhk.edu.cn/academics/lizhen/), 
 
 If you find our work useful in your research, please consider citing:
 ```
-@InProceedings{yan2020pointasnl,
-  title={PointASNL: Robust Point Clouds Processing using Nonlocal Neural Networks with Adaptive Sampling},
+@inproceedings{yan2020pointasnl,
+  title={Pointasnl: Robust point clouds processing using nonlocal neural networks with adaptive sampling},
   author={Yan, Xu and Zheng, Chaoda and Li, Zhen and Wang, Sheng and Cui, Shuguang},
-  journal={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={5589--5598},
   year={2020}
 }
 ```
