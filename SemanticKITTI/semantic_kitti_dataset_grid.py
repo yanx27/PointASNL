@@ -365,9 +365,9 @@ class SemanticKITTIDataset:
         self.test_data = tf.data.Dataset.from_generator(gen_function_test, gen_types, gen_shapes)
 
         map_func = self.get_tf_mapping()
-        self.train_data = self.train_data.map(map_func=map_func)
-        self.val_data = self.val_data.map(map_func=map_func)
-        self.test_data = self.test_data.map(map_func=map_func)
+        self.train_data = self.train_data.map(map_func=map_func,num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        self.val_data = self.val_data.map(map_func=map_func,num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        self.test_data = self.test_data.map(map_func=map_func,num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
         self.batch_train_data = self.train_data.batch(self.args.batch_size, drop_remainder=True)
         self.batch_val_data = self.val_data.batch(self.args.batch_size, drop_remainder=True)
